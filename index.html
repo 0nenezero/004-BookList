@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="assets/style/index.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -15,21 +16,24 @@
   <body>
     <div id="app">
       <h1 class="title">Book Archive</h1>
-      <section class="book-cont">
-        <h2 class="sr-only">책 목록</h2>
-        <ul id="book-list"></ul>
-      </section>
       <section class="form-cont">
         <h2 class="sr-only">책 추가하기</h2>
         <form class="book-form">
           <label for="title">제목 <input type="text" id="title" /></label>
-          <label for="author">작가 <input type="text" id="author" /></label>
+          <label for="author">저자 <input type="text" id="author" /></label>
           <button class="submit-btn" type="button">제출하기</button>
         </form>
       </section>
+
       <section class="toast-modal">
         <h2 class="sr-only">안내 메시지</h2>
-        <p class="toast-txt"></p>
+        <i class="fa-regular fa-circle-check"></i>
+        <p class="toast-txt">test</p>
+      </section>
+
+      <section class="book-cont">
+        <h2 class="sr-only">책 목록</h2>
+        <ul id="book-list"></ul>
       </section>
     </div>
     <script src="/assets/js/script.js"></script>

@@ -4,15 +4,11 @@ function renderBookItem(title, author) {
   const $bookItem = document.createElement("li");
   $bookItem.classList.add("book-item");
 
-  const $title = document.createElement("p");
-  $title.classList.add("title");
-  $title.textContent = title;
-  $bookItem.appendChild($title);
-
-  const $author = document.createElement("p");
-  $author.classList.add("author");
-  $author.textContent = author;
-  $bookItem.appendChild($author);
+  $bookItem.innerHTML = `
+  <div class='info-cont'>
+    <p class='title'>${title}</p>
+    <p class='author'>${author}</p>
+    </div>`;
 
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("delete-btn");
@@ -20,13 +16,12 @@ function renderBookItem(title, author) {
   deleteBtn.addEventListener("click", () => {
     window.confirm(`[${title}]을(를) 삭제하시겠습니까?`) &&
       $bookList.removeChild($bookItem);
+    index = Array.from($bookList.children).indexOf($bookItem);
+    remoteLocalStorage(index);
   });
   $bookItem.appendChild(deleteBtn);
-
   $bookList.appendChild($bookItem);
 }
-
-renderBookItem("자바스크립트 완벽 가이드", "데이비드 플래너건");
 
 const $submit = document.querySelector(".submit-btn");
 $submit.addEventListener("click", (e) => {
@@ -38,16 +33,17 @@ function checkSubmitInvalid() {
   const $author = document.getElementById("author");
 
   if ($title.value === "" || $author.value === "") {
-    timeToast("모든 항목을 입력해주세요.");
+    showToast("모든 항목을 입력해주세요.");
     return;
   } else {
     renderBookItem($title.value, $author.value);
+    setLocalStorage($title.value, $author.value);
     $title.value = "";
     $author.value = "";
   }
 }
 
-function timeToast(message) {
+function showToast(message) {
   const $toast = document.querySelector(".toast-modal");
   const $toastTxt = $toast.querySelector(".toast-txt");
   $toastTxt.textContent = message;
@@ -56,3 +52,26 @@ function timeToast(message) {
     $toast.classList.remove("show");
   }, 2000);
 }
+
+function setLocalStorage(title, author) {
+  const bookItem = {
+    title,
+    author,
+  };
+  const bookList = JSON.parse(localStorage.getItem("bookList")) || [];
+  bookList.push(bookItem);
+  localStorage.setItem("bookList", JSON.stringify(bookList));
+}
+function remoteLocalStorage(index) {
+  const bookList = JSON.parse(localStorage.getItem("bookList")) || [];
+  bookList.splice(index, 1);
+  localStorage.setItem("bookList", JSON.stringify(bookList));
+}
+
+function initBookList() {
+  const bookList = JSON.parse(localStorage.getItem("bookList")) || [];
+  bookList.forEach((book) => {
+    renderBookItem(book.title, book.author);
+  });
+}
+document.addEventListener("DOMContentLoaded", initBookList);
