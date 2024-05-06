@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="app">
+      <h1 class="title">Book Archive</h1>
+      <section class="book-cont">
+        <h2 class="sr-only">책 목록</h2>
+        <ul id="book-list"></ul>
+      </section>
+      <section class="form-cont">
+        <h2 class="sr-only">책 추가하기</h2>
+        <form class="book-form">
+          <label for="title">제목 <input type="text" id="title" /></label>
+          <label for="author">작가 <input type="text" id="author" /></label>
+          <button class="submit-btn" type="button">제출하기</button>
+        </form>
+      </section>
+      <section class="toast-modal">
+        <h2 class="sr-only">안내 메시지</h2>
+        <p class="toast-txt"></p>
+      </section>
+    </div>
+    <script src="/assets/js/script.js"></script>
+  </body>
+</html>
